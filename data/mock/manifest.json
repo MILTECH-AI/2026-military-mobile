@@ -1,0 +1,84 @@
+{
+  "source": "synthetic",
+  "isSynthetic": true,
+  "datasetVersion": "rexton-mock-v3",
+  "seed": 20261009,
+  "referenceUse": "PDF field names and generic part categories only; no original records",
+  "counts": {
+    "vehicles": 500,
+    "operations": 24500,
+    "maintenance": 5746,
+    "prediction": 24000,
+    "classification": 5746
+  },
+  "appCounts": {
+    "vehicles": 100,
+    "operations": 2400,
+    "maintenance": 583
+  },
+  "vehicleSplits": {
+    "train": 350,
+    "validation": 75,
+    "test": 75
+  },
+  "predictionSplits": {
+    "train": 16800,
+    "validation": 3600,
+    "test": 3600
+  },
+  "classificationSplits": {
+    "train": 4007,
+    "validation": 878,
+    "test": 861
+  },
+  "positiveRate": 0.11,
+  "scenarioCounts": {
+    "regular_prevention": 84,
+    "overdue_service": 84,
+    "rising_usage": 83,
+    "repeat_repairs": 83,
+    "low_usage": 83,
+    "heavy_usage": 83
+  },
+  "scenarioRules": "Persistent workload and latent wear; fuel degradation proxy; scheduled prevention reduces wear; corrective repair restores wear; repeat repairs partly restore wear. Coefficients are fictional, not engineering estimates.",
+  "featureNames": [
+    "releaseYear",
+    "ageYears",
+    "distanceKm",
+    "operatingHours",
+    "fuelL",
+    "monthlyDistanceKm",
+    "monthlyHours",
+    "monthlyFuelL",
+    "litersPer100Km",
+    "hasMaintenanceHistory",
+    "daysSinceMaintenance",
+    "maintenanceCount90Days",
+    "correctiveCount90Days",
+    "maintenanceCost90DaysWon"
+  ],
+  "labelMeaning": "Synthetic corrective maintenance event in next calendar month; NOT confirmed failure",
+  "missingValue": {
+    "daysSinceMaintenance": -1
+  },
+  "splitRules": "Disjoint vehicle IDs for both tasks; disjoint description template families for text task",
+  "limitations": [
+    "Handcrafted generator defines all labels; performance measures generator learning only",
+    "No actual fault labels, sensors, images or manual text",
+    "Fleet historical operations and maintenance are simulated, not recovered from source snapshots",
+    "Part prices are fictional single-record costs in KRW; no labor/quantity/tax inference"
+  ],
+  "sha256": {
+    "classification/test.jsonl": "3b95050beb8cc30620d3ae7162457f6617550d46c5b4a3e7c6a4bf16239d34ab",
+    "classification/train.jsonl": "6d2c06c3058294d48ebc8438c4285594c29d311814eff2afdf8e31d178ae93f7",
+    "classification/validation.jsonl": "0fcf8149add9a6a2f92b18412c452666f571be0e55cd6a5e73b9b78b150cfa89",
+    "maintenance.jsonl": "c7a65bfd036d505be1d84f08b77d6c6fb5e90b124bcdd6b4281b7160a7f19405",
+    "maintenance_classification.jsonl": "d527f9d5304749f2444992bd3eb692587bb758a11723319d21bcd3968869ff27",
+    "operations.jsonl": "df567a8c2486952997cc97b1309020c9451498d63d9a50daaf6f2880c5622a57",
+    "prediction/test.jsonl": "1f8c0e0c9592cfe3211f221e3392d965fa14be0053de9311f0cc1140810e9cd5",
+    "prediction/train.jsonl": "565834a47e13386d0f6b77e8e80a7ae18103768c78ac9e2ccefa412943a7e222",
+    "prediction/validation.jsonl": "f14bd97daba8953e599bde8480b3c63c621313e5a340daf2741cd93aa733cdbc",
+    "training.jsonl": "7cf9c93549292482edc07a8e913bf03d6004b9872b5f499f664ae6546163321d",
+    "vehicles.jsonl": "2e8fe1faf5be2a1a076eb5a95dc8b2ccea2624f796581dc5763a9d06d384b3d6"
+  }
+}

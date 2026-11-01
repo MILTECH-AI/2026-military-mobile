@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "checks": [
+    "hashes",
+    "synthetic provenance",
+    "references",
+    "cumulative totals",
+    "chronology",
+    "snapshot-only features",
+    "future labels",
+    "disjoint vehicles and text templates",
+    "split files",
+    "APK seed counts"
+  ],
+  "counts": {
+    "vehicles": 500,
+    "operations": 24500,
+    "maintenance": 5746,
+    "prediction": 24000,
+    "classification": 5746
+  },
+  "appCounts": {
+    "vehicles": 100,
+    "operations": 2400,
+    "maintenance": 583
+  },
+  "scenarioCounts": {
+    "regular_prevention": 84,
+    "overdue_service": 84,
+    "rising_usage": 83,
+    "repeat_repairs": 83,
+    "low_usage": 83,
+    "heavy_usage": 83
+  },
+  "predictionLabelCountsBySplit": {
+    "train": {
+      "0": 14965,
+      "1": 1835
+    },
+    "validation": {
+      "0": 3181,
+      "1": 419
+    },
+    "test": {
+      "1": 385,
+      "0": 3215
+    }
+  },
+  "classificationSystemCountsBySplit": {
+    "train": {
+      "공조": 469,
+      "흡기/배기": 546,
+      "엔진/연료": 722,
+      "차체": 258,
+      "제동": 598,
+      "동력전달": 525,
+      "냉각": 319,
+      "전장": 357,
+      "조향/현가": 213
+    },
+    "validation": {
+      "동력전달": 118,
+      "제동": 131,
+      "공조": 113,
+      "흡기/배기": 139,
+      "엔진/연료": 143,
+      "전장": 52,
+      "냉각": 67,
+      "차체": 66,
+      "조향/현가": 49
+    },
+    "test": {
+      "동력전달": 117,
+      "차체": 74,
+      "제동": 148,
+      "공조": 108,
+      "냉각": 56,
+      "전장": 55,
+      "엔진/연료": 143,
+      "흡기/배기": 114,
+      "조향/현가": 46
+    }
+  }
+}
