@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- The Android test manifest processor configures the first runner from Gradle. -->
+    <instrumentation android:name="com.superkid.military.military_maintenance.RagInstrumentation"
+        android:targetPackage="com.superkid.military.military_maintenance" />
+    <instrumentation android:name="com.superkid.military.military_maintenance.MemoryPolicyInstrumentation"
+        android:targetPackage="com.superkid.military.military_maintenance" />
+    <instrumentation android:name="com.superkid.military.military_maintenance.AuxUiInstrumentation"
+        android:targetPackage="com.superkid.military.military_maintenance.test" />
+    <instrumentation android:name="com.superkid.military.military_maintenance.AuxStoreInstrumentation"
+        android:targetPackage="com.superkid.military.military_maintenance" />
+    <instrumentation android:name="com.superkid.military.military_maintenance.AuxRuntimeDiagnosisInstrumentation"
+        android:targetPackage="com.superkid.military.military_maintenance" />
+</manifest>
