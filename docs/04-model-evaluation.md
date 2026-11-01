@@ -1,6 +1,8 @@
 # 모델 학습과 평가
 
-## 모델과 선택 방법
+## 합성 예제 모델과 과거 선택 방법
+
+현재 세 번째 모듈의 명칭은 **규칙 기반 잔여 정비거리 + 정비기록 분류**입니다. 아래 다음 달 고장 확률은 합성 예제 기록이며 실제 구현의 예측정비 성능이 아닙니다. 시계열 정비이력이 확보되면 예측 모델로 확장하는 구조만 남깁니다.
 
 | 과제 | 모델 | 입력 | 출력 |
 | --- | --- | --- | --- |
@@ -56,5 +58,42 @@ v3는 운행 연속성과 상태 악화·회복을 도입했습니다. 내부 �
 - 실제 고장 라벨, 비전 판정·답변 생성 자료는 사용하지 않았습니다.
 - 월말 학습과 월중 입력의 조건이 달라 부분월 정확도는 미검증입니다.
 - 사용자 입력 보호로 남은 이전 합성 이력의 성능은 별도 검증 대상입니다.
+
+## 실제 자료 문장 분류 파일럿 (2026-10-31)
+
+원자료 240건을 기존 AI 라벨 초안과 원문 위치로 연결했습니다. 검토 필요·복수 계통·정보 부족 42건을 제외한 198건, 9계통으로 파일럿을 구성했습니다. 라벨은 단일 AI 초안이며 사람이 확인한 정답이 아닙니다. 자료 작성 경위도 미확인입니다. 실차 이력 검증이나 독립 검토자 라벨링·일치도 평가를 재개하지 않았습니다.
+
+기존 결과는 정규화된 동일 문장·동일 개념 문자열만 192개 그룹으로 묶은 3분할이었습니다. 차량 식별값은 묶지 않아 96개 중 53개가 여러 폴드에 포함됐습니다. 새 문자 유사도 기준으로 검출한 2쌍 중 1쌍도 여러 폴드에 나뉘었습니다. 이 분할의 macro-F1 0.584182는 과거 결과로 보존하며 현재 대표값으로 쓰지 않습니다.
+
+2026-11-01 재평가에서는 차량 식별값(공백·하이픈 제거, 대문자화), 동일 문장, 동일 개념, 문자 유사 문장의 연결 관계를 합친 **89개 그룹**으로 3분할했습니다. 각 폴드는 학습 132 / 평가 66건이고 학습·평가 양쪽에 9계통이 모두 존재합니다. 전체 적격 자료는 198건, 차량 식별값 96개이며 식별값 누락은 없습니다. 입력 특성에는 차량 ID가 들어가지 않습니다.
+
+유사 문장 기준은 공백 제거 후 SequenceMatcher(autojunk=False) 비율 ≥0.70 **또는** 문자 3그램 Jaccard ≥0.50입니다. 성능을 보고 조정한 임계값이 아닌 누출 통제를 위한 휴리스틱이며 의미 유사성 보장은 아닙니다. 이 기준에 해당하는 문장 쌍 2개를 같은 그룹에 넣었습니다. 각 분할에서 그룹·차량 ID·검출된 유사 문장 쌍의 학습/평가 겹침이 모두 0임을 assert로 검사했습니다. 다른 표기의 실제 동일 차량이나 의미상 동의 문장을 전부 찾았다는 주장은 하지 않습니다.
+
+새 OOF **macro-F1은 0.496251**, 초안 일치율은 0.580808입니다. 다수 계통 기준선은 macro-F1 0.034988 / 초안 일치율 0.186869입니다. 일부 계통 표본은 6건뿐이며 냉각 계통은 OOF 정답 맞힘이 0건입니다. 단일 AI 초안과 원자료 작성 경위 미확인이라는 한계 때문에 실제 정확도나 부품 매핑 정확도로 해석하지 않습니다. 근거는 `private/system-pilot-grouped/training-report.json`, 행별 분할은 같은 경로의 `split-audit.json`, 변경 전후 감사는 `split-comparison.json`입니다.
+
+평가 분할만 바꿨으므로 전체 적격 자료로 학습한 최종 ONNX 가중치의 SHA-256은 이전과 동일합니다. 기존 런타임 정합성·시간 측정은 그 모델에 대한 기록으로 보존하며 새 평가 수치로 덮어쓰지 않습니다.
+
+모든 적격 행으로 다시 학습한 최종 모델의 PC/Android 실행 정합성은 별도 27입력으로 확인합니다. 이는 학습 행을 포함하는 런타임 비교이며 홀드아웃 성능과 합치지 않습니다. 학습 보고서·원문 위치 연결·분할 감사·모델·입력은 모두 `private/system-pilot/`에만 보관합니다.
+
+API 33 및 최종 APK의 API 24 에뮬레이터에서 각각 27/27 입력의 해시 특징 인덱스와 1위 계통이 PC와 일치했습니다. 출력 점수 최대 절대 차이는 3.43×10⁻⁸이며 실행 후 모델 loaded=false를 확인했습니다. API 24는 RAM 3GB 시작 설정·2코어·2스레드입니다. 근거는 `private/system-pilot/emulator-run/`과 `private/system-pilot/api24-final/`이며 실기기 결과가 아닙니다.
+
+## LLM 효용 평가 준비
+
+팀 작성 양식 25문항은 그대로 보존합니다. `tools/evaluate_rag_utility.py`는 원문 확인 표시·질문·부대 기준·정답 파일/쪽을 검사한 사본을 private 아래 준비합니다. 미작성 문항을 임의로 채우지 않으며 현재 검토 완료 0건은 `awaiting_team_questions`, 성능값 null입니다.
+
+앱의 `ragUtilityDeviceProbe`는 같은 질문·차량 적용조건·기준시각으로 한 번 검색한 상위 근거를 고정합니다. 검색만의 시간은 검색 구간, 요약 추가 시간은 그 검색 시간과 실제 요약 호출 시간의 합입니다. 로드·추론·해제·인용 검증을 포함하며 독립 무작위 A/B가 아닌 공유 검색 구간 비교입니다. 두 방식 모두 원문 근거를 계속 표시하므로 검색 정답 포함률을 LLM 개선 효과로 주장하지 않습니다.
+
+정답 근거 hit@1/3/5·recall@5·우선 근거 일치·근거 없는 질문의 반환 여부, 채택된 요약의 정답 인용 포함률, 자동 인용 검증 채택률, 실제 생성 실행 건수·보류 사유, 관측 시간 P50/P95(최근접 순위 방식)를 기록합니다. 선택적 사람 피드백은 `userAccepted: true/false/null`로 별도 집계합니다. 자동 인용 검증을 사람의 유용성·채택으로 해석하지 않으며 인용 위치 일치를 문장 관련성 판정으로 해석하지 않습니다. 교환주기 규칙값이 전후 불변인지도 검사합니다.
+
+실행 순서 예시(입력·출력은 모두 private 내부, 공개 모델은 사전 반입):
+
+```powershell
+python tools/evaluate_rag_utility.py --questions private/retrieval-stage/evaluation/questions-template.json --output private/rag-utility-stage/prepared
+# 검토된 문항이 있을 때만 실행. 대상 기기 serial을 명시합니다.
+./tools/run_embedding_probe.ps1 -Serial emulator-5582 -Entry ragUtilityDeviceProbe -UtilityQuestions "$PWD/private/rag-utility-stage/prepared/questions.json" -LlmModel "$PWD/models/local/qwen3-0.6b/model.gguf" -OutputDirectory "$PWD/private/rag-utility-stage/measured"
+python tools/evaluate_rag_utility.py --questions private/rag-utility-stage/prepared/questions.json --result private/rag-utility-stage/measured/emulator-or-device-result.json --metadata private/rag-utility-stage/measured/run-metadata.json --output private/rag-utility-stage/scored
+```
+
+정답 위치는 실행 시 설치된 근거와 다시 대조하고, 집계 시 설치한 질문 파일 SHA-256을 실행 메타데이터와 대조합니다. 사람 피드백을 추가할 때만 `--feedback private/.../human-feedback.json`을 지정합니다. 생성된 빈 피드백 파일은 다시 실행해도 덮어쓰지 않습니다. 질문 수정 후에는 새 측정이 필요합니다.
 
 [README로 돌아가기](../README.md)
