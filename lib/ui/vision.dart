@@ -29,6 +29,7 @@ class _VisionState extends ConsumerState<VisionScreen>
   CameraController? controller;
   bool initializing = false, capturing = false, saving = false, paused = false;
   int cameraGeneration = 0;
+  bool cameraStarting = false, resumeCamera = false;
   final annotation = TextEditingController();
   @override
   void initState() {
@@ -57,17 +58,36 @@ class _VisionState extends ConsumerState<VisionScreen>
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.inactive ||
         state == AppLifecycleState.paused) {
+      // A permission dialog briefly makes the app inactive. Keep its single
+      // initialization request alive until the user has answered.
+      if (state == AppLifecycleState.inactive && cameraStarting) return;
+      resumeCamera = resumeCamera || controller?.value.isInitialized == true;
       cameraGeneration++;
       final old = controller;
       controller = null;
       old?.dispose();
       if (mounted) setState(() => initializing = false);
-    } else if (state == AppLifecycleState.resumed && step == 2) {
+    } else if (state == AppLifecycleState.resumed &&
+        step == 2 &&
+        resumeCamera &&
+        !cameraStarting) {
+      resumeCamera = false;
       startCamera();
     }
   }
 
   Future<void> startCamera() async {
+    if (cameraStarting) return;
+    cameraStarting = true;
+    resumeCamera = false;
+    try {
+      await openCamera();
+    } finally {
+      cameraStarting = false;
+    }
+  }
+
+  Future<void> openCamera() async {
     final runtime = ref.read(adaptiveRuntimeProvider);
     await runtime.refreshDevice();
     if (!mounted) return;

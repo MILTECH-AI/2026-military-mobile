@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:military_maintenance/data/adaptive_runtime.dart';
 import 'package:military_maintenance/data/model_execution.dart';
@@ -13,6 +15,71 @@ import 'ui_usability_test.dart' show setup, tap, reveal;
 import 'data_tools_test.dart' show tapWithIo;
 
 void main() {
+  testWidgets('권한 창의 inactive·resumed 및 거부 복귀는 카메라를 재요청하지 않는다', (tester) async {
+    const camera = MethodChannel('plugins.flutter.io/camera');
+    final pending = Completer<void>();
+    var requests = 0;
+    final messenger =
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+    messenger.setMockMethodCallHandler(AndroidModelWorker.channel, (
+      call,
+    ) async {
+      if (call.method == 'capabilities') {
+        return {
+          'totalRamBytes': 4 * 1024 * 1024 * 1024,
+          'cores': 4,
+          'abis': ['arm64-v8a'],
+          'androidApi': 33,
+          'cameraStatus': 'permission_required',
+        };
+      }
+      return null;
+    });
+    messenger.setMockMethodCallHandler(camera, (call) async {
+      if (call.method == 'availableCameras') {
+        return [
+          {'name': 'qa', 'lensFacing': 'back', 'sensorOrientation': 90},
+        ];
+      }
+      if (call.method == 'create') {
+        requests++;
+        if (requests == 1) await pending.future;
+        throw PlatformException(code: 'CameraAccessDenied');
+      }
+      return null;
+    });
+    addTearDown(() {
+      messenger.setMockMethodCallHandler(camera, null);
+      messenger.setMockMethodCallHandler(AndroidModelWorker.channel, null);
+    });
+    await setup(tester);
+    appRouter.go('/vision');
+    await tester.pumpAndSettle();
+    await tap(tester, find.text('시작하기'));
+    await reveal(tester, find.text('촬영 시작'));
+    await tester.tap(find.text('촬영 시작'));
+    for (var i = 0; i < 10; i++) {
+      await tester.pump();
+    }
+    expect(requests, 1);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+    for (var i = 0; i < 10; i++) {
+      await tester.pump();
+    }
+    expect(requests, 1);
+    pending.complete();
+    await tester.pumpAndSettle();
+    expect(find.text('카메라 사용 불가 · 수동 부품 선택'), findsOneWidget);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.inactive);
+    tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+    await tester.pumpAndSettle();
+    expect(requests, 1);
+    await tap(tester, find.text('카메라 사용 조건 다시 확인'));
+    expect(requests, 2);
+    expect(tester.takeException(), isNull);
+  });
+
   test('LLM은 런타임 API 요구 수준이 명시되고 충족될 때만 대상이 된다', () {
     const llm = ModelSpec(
       'test-llm',
