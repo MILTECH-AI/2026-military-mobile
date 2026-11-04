@@ -219,6 +219,25 @@ void main() {
     expect(s.estimatedServiceDate(rule), isNull);
   });
 
+  test('서머타임 전환을 포함한 7일 관측과 정비일은 달력 날짜로 계산한다', () {
+    final s = AppStore(clock: () => DateTime(2026, 3, 12, 13))
+      ..vehicles = [vehicle]
+      ..operations = [
+        {'vehicleId': vehicle.id, 'created': '2026-03-05', 'distance': 12000},
+        {'vehicleId': vehicle.id, 'created': '2026-03-12', 'distance': 15000},
+      ];
+    const springRule = MaintenanceRule(
+      id: 'SPRING',
+      vehicleId: 'TEST-1',
+      part: '엔진오일',
+      intervalKm: 10000,
+      baselineKm: 10000,
+      baselineDate: '2026-01-01',
+      source: '가상 지침',
+    );
+    expect(s.estimatedServiceDate(springRule), DateTime(2026, 3, 24));
+  });
+
   test('근거 위치와 정비 주기의 범위·중복을 검증한다', () {
     expect(
       SupportLibrary.decode(

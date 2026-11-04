@@ -3,6 +3,8 @@ import 'dart:math' as math;
 
 import 'package:flutter/services.dart';
 
+import 'calendar.dart';
+
 class ClassificationLabel {
   const ClassificationLabel(this.label, this.confidence, this.coverage);
   final String? label;
@@ -172,9 +174,11 @@ Map<String, num>? predictionFeatures({
             (o) =>
                 o['vehicleId'] == vehicleId &&
                 !DateTime.parse(o['created'] as String).isAfter(
-                  cutoff
-                      .add(const Duration(days: 1))
-                      .subtract(const Duration(microseconds: 1)),
+                  DateTime(
+                    cutoff.year,
+                    cutoff.month,
+                    cutoff.day + 1,
+                  ).subtract(const Duration(microseconds: 1)),
                 ),
           )
           .toList()
@@ -224,7 +228,8 @@ Map<String, num>? predictionFeatures({
   final recent = history
       .where(
         (r) =>
-            cutoff.difference(DateTime.parse(r['date'] as String)).inDays < 90,
+            calendarDaysBetween(cutoff, DateTime.parse(r['date'] as String)) <
+            90,
       )
       .toList();
   final dates = history.map((r) => DateTime.parse(r['date'] as String)).toList()
@@ -242,7 +247,7 @@ Map<String, num>? predictionFeatures({
     'hasMaintenanceHistory': history.isEmpty ? 0 : 1,
     'daysSinceMaintenance': dates.isEmpty
         ? -1
-        : cutoff.difference(dates.last).inDays,
+        : calendarDaysBetween(cutoff, dates.last),
     'maintenanceCount90Days': recent.length,
     'correctiveCount90Days': recent
         .where((r) => r['maintenanceType'] == '고장수리')

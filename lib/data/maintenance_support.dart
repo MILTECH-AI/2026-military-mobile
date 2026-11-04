@@ -535,16 +535,18 @@ extension MaintenanceSupport on AppStore {
     if (rule.templateId != null) return null;
     final remaining = serviceDistance(rule).remainingKm;
     if (remaining == null) return null;
-    if (remaining == 0) return clock();
     final now = clock();
+    final today = DateTime(now.year, now.month, now.day);
+    if (remaining == 0) return today;
+    // Mileage forecasts use calendar days, independent of DST hour changes.
+    int age(DateTime value) => calendarDaysBetween(now, value);
     final rows =
         operations
             .where(
               (r) =>
                   r['vehicleId'] == rule.vehicleId &&
                   !DateTime.parse(r['created']).isAfter(now) &&
-                  DateTime.parse(r['created'])
-                      .isAfter(now.subtract(const Duration(days: 90))),
+                  age(DateTime.parse(r['created'])) < 90,
             )
             .toList()
           ..sort(
@@ -552,9 +554,10 @@ extension MaintenanceSupport on AppStore {
                 (a['created'] as String).compareTo(b['created'] as String),
           );
     if (rows.length < 2) return null;
-    final days = DateTime.parse(rows.last['created'])
-        .difference(DateTime.parse(rows.first['created']))
-        .inDays;
+    final days = calendarDaysBetween(
+      DateTime.parse(rows.last['created']),
+      DateTime.parse(rows.first['created']),
+    );
     final km = (rows.last['distance'] as int) - (rows.first['distance'] as int);
     if (days < 7 || km <= 0) return null;
     // Reject inconsistent or reversed cumulative readings.
@@ -564,10 +567,14 @@ extension MaintenanceSupport on AppStore {
       }
     }
     final firstDate = DateTime.parse(rows.first['created']);
-    if (now.difference(DateTime.parse(rows.last['created'])).inDays > 30 ||
+    if (age(DateTime.parse(rows.last['created'])) > 30 ||
         firstDate.isAfter(now)) {
       return null;
     }
-    return now.add(Duration(days: (remaining * days / km).ceil()));
+    return DateTime(
+      now.year,
+      now.month,
+      now.day + (remaining * days / km).ceil(),
+    );
   }
 }

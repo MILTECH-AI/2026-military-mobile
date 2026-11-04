@@ -218,9 +218,7 @@ extension ServicePolicy on AppStore {
       calendarReason = '교환일 미확인';
     } else {
       due = addCalendarMonths(DateTime.parse(date), profile['months'] as int);
-      remainingDays = due
-          .difference(DateTime(at.year, at.month, at.day))
-          .inDays;
+      remainingDays = calendarDaysBetween(due, at);
     }
     var first = '선도래 순서 확인 불가';
     if (remaining == 0 && remainingDays != null && remainingDays > 0) {

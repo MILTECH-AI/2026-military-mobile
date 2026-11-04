@@ -10,6 +10,7 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'local_models.dart';
+import 'calendar.dart';
 part 'backup.dart';
 part 'maintenance_support.dart';
 part 'knowledge_import.dart';
