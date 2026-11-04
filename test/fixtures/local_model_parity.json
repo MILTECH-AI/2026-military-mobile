@@ -1,0 +1,700 @@
+{
+  "modelVersions": {
+    "prediction": "rexton-local-2-387126706dbf",
+    "classification": "rexton-text-2-9d2ffc51c445"
+  },
+  "prediction": [
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 9,
+        "distanceKm": 173277,
+        "operatingHours": 4902,
+        "fuelL": 20797,
+        "monthlyDistanceKm": 2160,
+        "monthlyHours": 52,
+        "monthlyFuelL": 332,
+        "litersPer100Km": 15.37,
+        "hasMaintenanceHistory": 0,
+        "daysSinceMaintenance": -1,
+        "maintenanceCount90Days": 0,
+        "correctiveCount90Days": 0,
+        "maintenanceCost90DaysWon": 0
+      },
+      "probability": 0.6073719010170184
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 9,
+        "distanceKm": 175489,
+        "operatingHours": 4952,
+        "fuelL": 21054,
+        "monthlyDistanceKm": 2212,
+        "monthlyHours": 50,
+        "monthlyFuelL": 257,
+        "litersPer100Km": 11.618,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 7,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 1,
+        "maintenanceCost90DaysWon": 74000
+      },
+      "probability": 0.03432757981955661
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 9,
+        "distanceKm": 177649,
+        "operatingHours": 5009,
+        "fuelL": 21313,
+        "monthlyDistanceKm": 2160,
+        "monthlyHours": 57,
+        "monthlyFuelL": 259,
+        "litersPer100Km": 11.991,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 38,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 1,
+        "maintenanceCost90DaysWon": 74000
+      },
+      "probability": 0.04687151969478186
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 10,
+        "distanceKm": 179803,
+        "operatingHours": 5083,
+        "fuelL": 21593,
+        "monthlyDistanceKm": 2154,
+        "monthlyHours": 74,
+        "monthlyFuelL": 280,
+        "litersPer100Km": 12.999,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 69,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 1,
+        "maintenanceCost90DaysWon": 74000
+      },
+      "probability": 0.1137101369753357
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 10,
+        "distanceKm": 181960,
+        "operatingHours": 5146,
+        "fuelL": 21798,
+        "monthlyDistanceKm": 2157,
+        "monthlyHours": 63,
+        "monthlyFuelL": 205,
+        "litersPer100Km": 9.504,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 1,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 1,
+        "maintenanceCost90DaysWon": 41000
+      },
+      "probability": 0.00402905899119261
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 10,
+        "distanceKm": 184113,
+        "operatingHours": 5196,
+        "fuelL": 22020,
+        "monthlyDistanceKm": 2153,
+        "monthlyHours": 50,
+        "monthlyFuelL": 222,
+        "litersPer100Km": 10.311,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 32,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 1,
+        "maintenanceCost90DaysWon": 41000
+      },
+      "probability": 0.009671991146337856
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 10,
+        "distanceKm": 186277,
+        "operatingHours": 5250,
+        "fuelL": 22268,
+        "monthlyDistanceKm": 2164,
+        "monthlyHours": 54,
+        "monthlyFuelL": 248,
+        "litersPer100Km": 11.46,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 62,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 1,
+        "maintenanceCost90DaysWon": 41000
+      },
+      "probability": 0.02976992735917335
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 10,
+        "distanceKm": 188509,
+        "operatingHours": 5308,
+        "fuelL": 22540,
+        "monthlyDistanceKm": 2232,
+        "monthlyHours": 58,
+        "monthlyFuelL": 272,
+        "litersPer100Km": 12.186,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 93,
+        "maintenanceCount90Days": 0,
+        "correctiveCount90Days": 0,
+        "maintenanceCost90DaysWon": 0
+      },
+      "probability": 0.06803558900833158
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 10,
+        "distanceKm": 190678,
+        "operatingHours": 5371,
+        "fuelL": 22823,
+        "monthlyDistanceKm": 2169,
+        "monthlyHours": 63,
+        "monthlyFuelL": 283,
+        "litersPer100Km": 13.047,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 123,
+        "maintenanceCount90Days": 0,
+        "correctiveCount90Days": 0,
+        "maintenanceCost90DaysWon": 0
+      },
+      "probability": 0.14190508551918204
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 10,
+        "distanceKm": 192829,
+        "operatingHours": 5447,
+        "fuelL": 23140,
+        "monthlyDistanceKm": 2151,
+        "monthlyHours": 76,
+        "monthlyFuelL": 317,
+        "litersPer100Km": 14.737,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 154,
+        "maintenanceCount90Days": 0,
+        "correctiveCount90Days": 0,
+        "maintenanceCost90DaysWon": 0
+      },
+      "probability": 0.4572707733683152
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 10,
+        "distanceKm": 194967,
+        "operatingHours": 5508,
+        "fuelL": 23422,
+        "monthlyDistanceKm": 2138,
+        "monthlyHours": 61,
+        "monthlyFuelL": 282,
+        "litersPer100Km": 13.19,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 7,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 0,
+        "maintenanceCost90DaysWon": 174000
+      },
+      "probability": 0.13734961331540738
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 10,
+        "distanceKm": 197066,
+        "operatingHours": 5577,
+        "fuelL": 23714,
+        "monthlyDistanceKm": 2099,
+        "monthlyHours": 69,
+        "monthlyFuelL": 292,
+        "litersPer100Km": 13.911,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 37,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 0,
+        "maintenanceCost90DaysWon": 174000
+      },
+      "probability": 0.23698197582553063
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 10,
+        "distanceKm": 199216,
+        "operatingHours": 5635,
+        "fuelL": 24034,
+        "monthlyDistanceKm": 2150,
+        "monthlyHours": 58,
+        "monthlyFuelL": 320,
+        "litersPer100Km": 14.884,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 68,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 0,
+        "maintenanceCost90DaysWon": 174000
+      },
+      "probability": 0.4746291515584952
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 10,
+        "distanceKm": 201359,
+        "operatingHours": 5680,
+        "fuelL": 24274,
+        "monthlyDistanceKm": 2143,
+        "monthlyHours": 45,
+        "monthlyFuelL": 240,
+        "litersPer100Km": 11.199,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 15,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 1,
+        "maintenanceCost90DaysWon": 60000
+      },
+      "probability": 0.0233968537619493
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 10,
+        "distanceKm": 203480,
+        "operatingHours": 5725,
+        "fuelL": 24545,
+        "monthlyDistanceKm": 2121,
+        "monthlyHours": 45,
+        "monthlyFuelL": 271,
+        "litersPer100Km": 12.777,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 46,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 1,
+        "maintenanceCost90DaysWon": 60000
+      },
+      "probability": 0.10411944215976351
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 11,
+        "distanceKm": 205545,
+        "operatingHours": 5781,
+        "fuelL": 24828,
+        "monthlyDistanceKm": 2065,
+        "monthlyHours": 56,
+        "monthlyFuelL": 283,
+        "litersPer100Km": 13.705,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 77,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 1,
+        "maintenanceCost90DaysWon": 60000
+      },
+      "probability": 0.2187702598909092
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 11,
+        "distanceKm": 207646,
+        "operatingHours": 5840,
+        "fuelL": 25121,
+        "monthlyDistanceKm": 2101,
+        "monthlyHours": 59,
+        "monthlyFuelL": 293,
+        "litersPer100Km": 13.946,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 106,
+        "maintenanceCount90Days": 0,
+        "correctiveCount90Days": 0,
+        "maintenanceCost90DaysWon": 0
+      },
+      "probability": 0.29027868221026304
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 11,
+        "distanceKm": 209736,
+        "operatingHours": 5906,
+        "fuelL": 25337,
+        "monthlyDistanceKm": 2090,
+        "monthlyHours": 66,
+        "monthlyFuelL": 216,
+        "litersPer100Km": 10.335,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 7,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 1,
+        "maintenanceCost90DaysWon": 34000
+      },
+      "probability": 0.009120766418416441
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 11,
+        "distanceKm": 211833,
+        "operatingHours": 5953,
+        "fuelL": 25575,
+        "monthlyDistanceKm": 2097,
+        "monthlyHours": 47,
+        "monthlyFuelL": 238,
+        "litersPer100Km": 11.35,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 37,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 1,
+        "maintenanceCost90DaysWon": 34000
+      },
+      "probability": 0.02745106175931412
+    },
+    {
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 11,
+        "distanceKm": 213985,
+        "operatingHours": 6001,
+        "fuelL": 25842,
+        "monthlyDistanceKm": 2152,
+        "monthlyHours": 48,
+        "monthlyFuelL": 267,
+        "litersPer100Km": 12.407,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 68,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 1,
+        "maintenanceCost90DaysWon": 34000
+      },
+      "probability": 0.0771885897221962
+    }
+  ],
+  "classification": [
+    {
+      "description": "가상 차량의 변속기 센서 교체 건이며, 사전 점검 메모에는 변속 지연이 적혀 있다.",
+      "part": "변속기 센서",
+      "expected": {
+        "system": {
+          "label": "동력전달",
+          "confidence": 1.0,
+          "coverage": 0.37333333333333335
+        },
+        "maintenanceType": {
+          "label": "고장수리",
+          "confidence": 1.0,
+          "coverage": 0.37333333333333335
+        }
+      }
+    },
+    {
+      "description": "가상 차량의 적재함 고정 부품 교체 건이며, 사전 점검 메모에는 적재함 잠금 유격이 적혀 있다.",
+      "part": "적재함 고정 부품",
+      "expected": {
+        "system": {
+          "label": "차체",
+          "confidence": 1.0,
+          "coverage": 0.47191011235955055
+        },
+        "maintenanceType": {
+          "label": "고장수리",
+          "confidence": 1.0,
+          "coverage": 0.47191011235955055
+        }
+      }
+    },
+    {
+      "description": "가상 차량의 변속기 오일 교체 건이며, 사전 점검 메모에는 오일 교환 주기 도달이 적혀 있다.",
+      "part": "변속기 오일",
+      "expected": {
+        "system": {
+          "label": "동력전달",
+          "confidence": 1.0,
+          "coverage": 0.43373493975903615
+        },
+        "maintenanceType": {
+          "label": "예방",
+          "confidence": 1.0,
+          "coverage": 0.43373493975903615
+        }
+      }
+    },
+    {
+      "description": "가상 차량의 브레이크 호스 교체 건이며, 사전 점검 메모에는 제동 압력 점검 이상이 적혀 있다.",
+      "part": "브레이크 호스",
+      "expected": {
+        "system": {
+          "label": "제동",
+          "confidence": 1.0,
+          "coverage": 0.45977011494252873
+        },
+        "maintenanceType": {
+          "label": "고장수리",
+          "confidence": 1.0,
+          "coverage": 0.45977011494252873
+        }
+      }
+    },
+    {
+      "description": "가상 차량의 적재함 고정 부품 교체 건이며, 사전 점검 메모에는 적재함 잠금 유격이 적혀 있다.",
+      "part": "적재함 고정 부품",
+      "expected": {
+        "system": {
+          "label": "차체",
+          "confidence": 1.0,
+          "coverage": 0.47191011235955055
+        },
+        "maintenanceType": {
+          "label": "고장수리",
+          "confidence": 1.0,
+          "coverage": 0.47191011235955055
+        }
+      }
+    },
+    {
+      "description": "가상 차량의 브레이크 호스 교체 건이며, 사전 점검 메모에는 제동 압력 점검 이상이 적혀 있다.",
+      "part": "브레이크 호스",
+      "expected": {
+        "system": {
+          "label": "제동",
+          "confidence": 1.0,
+          "coverage": 0.45977011494252873
+        },
+        "maintenanceType": {
+          "label": "고장수리",
+          "confidence": 1.0,
+          "coverage": 0.45977011494252873
+        }
+      }
+    },
+    {
+      "description": "가상 차량의 공조 필터 교체 건이며, 사전 점검 메모에는 실내 필터 교환 주기 도달이 적혀 있다.",
+      "part": "공조 필터",
+      "expected": {
+        "system": {
+          "label": "공조",
+          "confidence": 1.0,
+          "coverage": 0.43373493975903615
+        },
+        "maintenanceType": {
+          "label": "예방",
+          "confidence": 1.0,
+          "coverage": 0.43373493975903615
+        }
+      }
+    },
+    {
+      "description": "가상 차량의 브레이크 호스 교체 건이며, 사전 점검 메모에는 제동 압력 점검 이상이 적혀 있다.",
+      "part": "브레이크 호스",
+      "expected": {
+        "system": {
+          "label": "제동",
+          "confidence": 1.0,
+          "coverage": 0.45977011494252873
+        },
+        "maintenanceType": {
+          "label": "고장수리",
+          "confidence": 1.0,
+          "coverage": 0.45977011494252873
+        }
+      }
+    },
+    {
+      "description": "가상 차량의 공조 필터 교체 건이며, 사전 점검 메모에는 실내 필터 교환 주기 도달이 적혀 있다.",
+      "part": "공조 필터",
+      "expected": {
+        "system": {
+          "label": "공조",
+          "confidence": 1.0,
+          "coverage": 0.43373493975903615
+        },
+        "maintenanceType": {
+          "label": "예방",
+          "confidence": 1.0,
+          "coverage": 0.43373493975903615
+        }
+      }
+    },
+    {
+      "description": "합성 사례에서 송풍량 감소을 기록하고 공조 팬를 바꾼 뒤 동작을 확인했다.",
+      "part": "공조 팬",
+      "expected": {
+        "system": {
+          "label": "공조",
+          "confidence": 1.0,
+          "coverage": 0.2923076923076923
+        },
+        "maintenanceType": {
+          "label": "고장수리",
+          "confidence": 1.0,
+          "coverage": 0.2923076923076923
+        }
+      }
+    },
+    {
+      "description": "가상 차량의 서모스탯 교체 건이며, 사전 점검 메모에는 수온 변화 편차이 적혀 있다.",
+      "part": "서모스탯",
+      "expected": {
+        "system": {
+          "label": "냉각",
+          "confidence": 1.0,
+          "coverage": 0.37333333333333335
+        },
+        "maintenanceType": {
+          "label": "고장수리",
+          "confidence": 1.0,
+          "coverage": 0.37333333333333335
+        }
+      }
+    },
+    {
+      "description": "가상 차량의 배터리 교체 건이며, 사전 점검 메모에는 시동 지연이 적혀 있다.",
+      "part": "배터리",
+      "expected": {
+        "system": {
+          "label": "전장",
+          "confidence": 1.0,
+          "coverage": 0.29850746268656714
+        },
+        "maintenanceType": {
+          "label": "고장수리",
+          "confidence": 1.0,
+          "coverage": 0.29850746268656714
+        }
+      }
+    },
+    {
+      "part": "",
+      "description": "xyz123 🟪🟪",
+      "expected": {
+        "system": {
+          "label": null,
+          "confidence": 0.18018467681557274,
+          "coverage": 0.0
+        },
+        "maintenanceType": {
+          "label": null,
+          "confidence": 0.5373097080109808,
+          "coverage": 0.0
+        }
+      }
+    }
+  ],
+  "appSnapshots": [
+    {
+      "vehicleId": "MOCK-RX-0001",
+      "observedAt": "2026-09-30",
+      "features": {
+        "releaseYear": 2013,
+        "ageYears": 13,
+        "distanceKm": 197700,
+        "operatingHours": 5367,
+        "fuelL": 18971,
+        "monthlyDistanceKm": 1134,
+        "monthlyHours": 37,
+        "monthlyFuelL": 111,
+        "litersPer100Km": 9.788,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 65,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 0,
+        "maintenanceCost90DaysWon": 43000
+      }
+    },
+    {
+      "vehicleId": "MOCK-RX-0002",
+      "observedAt": "2026-09-30",
+      "features": {
+        "releaseYear": 2009,
+        "ageYears": 17,
+        "distanceKm": 215126,
+        "operatingHours": 6177,
+        "fuelL": 26117,
+        "monthlyDistanceKm": 598,
+        "monthlyHours": 20,
+        "monthlyFuelL": 62,
+        "litersPer100Km": 10.368,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 69,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 0,
+        "maintenanceCost90DaysWon": 128000
+      }
+    },
+    {
+      "vehicleId": "MOCK-RX-0003",
+      "observedAt": "2026-09-30",
+      "features": {
+        "releaseYear": 2020,
+        "ageYears": 6,
+        "distanceKm": 130516,
+        "operatingHours": 3272,
+        "fuelL": 15914,
+        "monthlyDistanceKm": 2364,
+        "monthlyHours": 64,
+        "monthlyFuelL": 249,
+        "litersPer100Km": 10.533,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 33,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 1,
+        "maintenanceCost90DaysWon": 277000
+      }
+    },
+    {
+      "vehicleId": "MOCK-RX-0004",
+      "observedAt": "2026-09-30",
+      "features": {
+        "releaseYear": 2019,
+        "ageYears": 7,
+        "distanceKm": 85152,
+        "operatingHours": 2086,
+        "fuelL": 9596,
+        "monthlyDistanceKm": 940,
+        "monthlyHours": 21,
+        "monthlyFuelL": 139,
+        "litersPer100Km": 14.787,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 53,
+        "maintenanceCount90Days": 1,
+        "correctiveCount90Days": 1,
+        "maintenanceCost90DaysWon": 68000
+      }
+    },
+    {
+      "vehicleId": "MOCK-RX-0005",
+      "observedAt": "2026-09-30",
+      "features": {
+        "releaseYear": 2010,
+        "ageYears": 16,
+        "distanceKm": 181568,
+        "operatingHours": 5327,
+        "fuelL": 17180,
+        "monthlyDistanceKm": 395,
+        "monthlyHours": 8,
+        "monthlyFuelL": 48,
+        "litersPer100Km": 12.152,
+        "hasMaintenanceHistory": 1,
+        "daysSinceMaintenance": 272,
+        "maintenanceCount90Days": 0,
+        "correctiveCount90Days": 0,
+        "maintenanceCost90DaysWon": 0
+      }
+    }
+  ]
+}

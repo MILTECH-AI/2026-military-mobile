@@ -65,8 +65,16 @@ void main() {
   test('Python 학습 결과와 Dart 예측·분류·특성 계산이 일치한다', () async {
     final model = await LocalModels.load();
     final fixtures = jsonDecode(
-      File('output/models/parity_fixtures.json').readAsStringSync(),
+      File('test/fixtures/local_model_parity.json').readAsStringSync(),
     ) as Map;
+    expect(
+      fixtures['modelVersions']['prediction'],
+      model.prediction['version'],
+    );
+    expect(
+      fixtures['modelVersions']['classification'],
+      model.classification['version'],
+    );
     for (final row in fixtures['prediction'] as List) {
       final features = Map<String, num>.from(row['features'] as Map);
       expect(
@@ -246,7 +254,8 @@ void main() {
     }
     timings.sort();
     final report = {
-      'environment': 'Windows Flutter test runner; not Galaxy Tab hardware',
+      'environment':
+          '${Platform.operatingSystem} Flutter test runner; not tablet hardware',
       'status': 'passed',
       'maintenanceSaveToPredictionMs':
           maintenanceWatch.elapsedMicroseconds / 1000,
@@ -265,8 +274,11 @@ void main() {
         'ten consecutive local writes',
       ],
     };
-    await File('output/models/live_update_report.json')
-        .writeAsString(const JsonEncoder.withIndent('  ').convert(report));
+    final reportFile = File('output/models/live_update_report.json');
+    await reportFile.parent.create(recursive: true);
+    await reportFile.writeAsString(
+      const JsonEncoder.withIndent('  ').convert(report),
+    );
     await reopened.db!.close();
     await folder.delete(recursive: true);
   });
