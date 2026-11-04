@@ -14,21 +14,29 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import org.json.JSONObject
 
-/** Test APK only. Runs the app's real Dart RAG and native ONNX in an API 24 AVD. */
+/** Test APK only. Runs real Dart/native diagnostics on Android devices and AVDs. */
 class RagInstrumentation : Instrumentation() {
     private var entry = "ragDeviceProbe"
     private var threads = 2
     private var userWaitMs = 1000
     private var reuseInstalled = false
     private var auxiliaryPhone = false
+    private var qaRunId = ""
     private fun writeReport(data: Map<*, *>) {
-        val safe = if (auxiliaryPhone) AuxReportPrivacy.report(data) else data
+        val tagged = mutableMapOf<Any?, Any?>().apply {
+            putAll(data)
+            put("diagnosticEntry", entry)
+            put("qaRunId", qaRunId)
+        }
+        val safe = if (auxiliaryPhone) AuxReportPrivacy.report(tagged) else tagged
         File(targetContext.filesDir, "rag-probe-result.json").writeText(JSONObject(safe).toString(2))
     }
     override fun onCreate(arguments: Bundle?) {
         super.onCreate(arguments)
         entry = arguments?.getString("entry") ?: "ragDeviceProbe"
-        require(entry in listOf("ragDeviceProbe", "memoryWarningDeviceProbe", "optionalModelDeviceProbe", "visionDeviceProbe", "flowDeviceProbe", "systemPilotDeviceProbe", "ragUtilityDeviceProbe"))
+        qaRunId = arguments?.getString("qaRunId") ?: ""
+        require(qaRunId.matches(Regex("[A-Za-z0-9_-]{0,80}")))
+        require(entry in listOf("ragDeviceProbe", "mlDeviceProbe", "memoryWarningDeviceProbe", "optionalModelDeviceProbe", "visionDeviceProbe", "flowDeviceProbe", "systemPilotDeviceProbe", "ragUtilityDeviceProbe"))
         threads = arguments?.getString("threads")?.toInt() ?: 2
         userWaitMs = arguments?.getString("userWaitMs")?.toInt() ?: 1000
         reuseInstalled = arguments?.getString("reuseInstalled") == "true"
@@ -40,7 +48,7 @@ class RagInstrumentation : Instrumentation() {
     override fun onStart() {
         Thread {
             try {
-              if (!reuseInstalled) {
+              if (!reuseInstalled && entry != "mlDeviceProbe") {
                 EmbeddingFiles.install(targetContext, File(targetContext.cacheDir, "maintenance-import-probe.mrag"))
                 if (entry in listOf("optionalModelDeviceProbe", "flowDeviceProbe", "ragUtilityDeviceProbe")) LlmFiles.install(targetContext, File(targetContext.cacheDir, "maintenance-import-llm.gguf"))
                 if (entry in listOf("visionDeviceProbe", "flowDeviceProbe")) VisionFiles.install(targetContext, File(targetContext.cacheDir, "maintenance-import-vision.onnx"))
@@ -87,7 +95,15 @@ class RagInstrumentation : Instrumentation() {
             if (!completed.await(if (entry == "ragUtilityDeviceProbe") 3600 else if (entry in listOf("optionalModelDeviceProbe", "flowDeviceProbe")) 600 else 180, TimeUnit.SECONDS)) payload = mapOf("status" to "failed", "error" to "instrumentation_timeout")
             val data = mutableMapOf<Any?, Any?>()
             data.putAll(payload ?: mapOf("status" to "failed", "error" to "empty_result"))
-            data["bundleInstallVerified"] = !reuseInstalled
+            data["bundleInstallVerified"] = !reuseInstalled && entry != "mlDeviceProbe"
+            if (entry == "mlDeviceProbe") {
+                val emulator = android.os.Build.FINGERPRINT.startsWith("generic") ||
+                    android.os.Build.HARDWARE.contains("ranchu") || android.os.Build.HARDWARE.contains("goldfish")
+                data["physicalDevice"] = !emulator
+                data["platform"] = if (emulator) "android-emulator" else "android-device"
+                data["device"] = mapOf("model" to android.os.Build.MODEL,
+                    "api" to android.os.Build.VERSION.SDK_INT, "abis" to android.os.Build.SUPPORTED_ABIS.toList())
+            }
             data["reusedPreviouslyVerifiedInstallation"] = reuseInstalled
             if (entry == "optionalModelDeviceProbe") data["llmInstallVerified"] = true
             if (entry == "visionDeviceProbe") data["visionInstallVerified"] = true

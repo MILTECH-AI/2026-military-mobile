@@ -25,6 +25,14 @@ class ObservedModelWorker implements ModelWorker {
       trimNextLlm = false;
       trimCommandOutput = await const MethodChannel('maintenance/device_probe')
           .invokeMethod<String>('triggerTrim');
+      // A trim signal alone may correctly keep running when RAM is sufficient.
+      // Exercise the pressure branch explicitly with a debug-only RAM snapshot.
+      await AndroidModelWorker.channel.invokeMethod<void>('diagnosticTrim', {
+        'level': 15,
+        'availableBytes': 0,
+        'androidThresholdBytes': 268435456,
+        'lowMemory': true,
+      });
     }
   }
 
@@ -117,6 +125,9 @@ Future<void> runOptionalModelDeviceProbe() async {
     if (summary.run?.mode != 'model') {
       throw StateError('real generation failed: ${summary.reason}');
     }
+    if (summary.mode != 'extractive_summary' || summary.excerpts.isEmpty) {
+      throw StateError('no accepted summary: ${summary.reason}');
+    }
     if (summary.run!.output!['workerPid'] == pid) {
       throw StateError('process isolation failed');
     }
@@ -162,7 +173,7 @@ Future<void> runOptionalModelDeviceProbe() async {
       throw StateError('low-memory fallback failed');
     }
     report['memoryPressure'] = {
-      'method': 'Android OS RUNNING_CRITICAL trim signal after real model load; not kernel OOM exhaustion',
+      'method': 'Android OS RUNNING_CRITICAL plus debug-injected low-RAM snapshot after real model load; not kernel OOM exhaustion',
       'commandOutput': worker.trimCommandOutput,
       'mode': memory.mode,
       'reason': memory.reason,

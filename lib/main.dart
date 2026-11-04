@@ -21,6 +21,12 @@ import 'flow_device_probe.dart';
 import 'system_pilot_device_probe.dart';
 import 'rag_utility_device_probe.dart';
 import 'memory_warning_device_probe.dart';
+import 'ml_device_probe.dart';
+
+@pragma('vm:entry-point')
+void mlDeviceProbe() {
+  runMlDeviceProbe();
+}
 
 @pragma('vm:entry-point')
 void memoryWarningDeviceProbe() {
