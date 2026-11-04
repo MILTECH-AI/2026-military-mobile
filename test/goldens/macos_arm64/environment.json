@@ -1,0 +1,14 @@
+{
+  "hostAbi": "macos_arm64",
+  "flutterVersion": "3.47.7",
+  "dartVersion": "3.13.5",
+  "frameworkRevision": "abaf9c523780a608bd46686fd5e53740a07077f8",
+  "engineRevision": "deb287481e3ce9468f3434937ced4240a70539ca",
+  "fontSha256": {
+    "NotoSansKR.ttf": "194018e6b2b293a7964f037b25c0249ce1418bc9ab3c971060a03aa57861e252",
+    "MaterialIcons-Regular.otf": "d9865b671a09d683d13a863089d8825e0f61a37696ce5d7d448bc8023aa62453"
+  },
+  "goldenCount": 29,
+  "comparison": "exact pixels; no tolerance; missing references fail",
+  "review": "29 original/candidate pairs visually reviewed; matching dimensions; no changed flat 3x3 region interiors"
+}
